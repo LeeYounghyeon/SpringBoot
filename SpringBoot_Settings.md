@@ -141,6 +141,7 @@ public class CommunityApplication{
 
 
 
+
   ```java
 package com.example.demo2;
 
@@ -355,4 +356,3 @@ public class PropertyTest {
   - @EnableAutoConfiguration : 자동 설정의 핵심 어노테이션이다. 클래스 경로에 지정된 내용을 기반으로 영리하게 설정 자동화를 수행한다. 특별한 설정값을 추가하지 않으면 기본값으로 작동한다.
   - @ComponenetScan : 특정 패키지 경로를 기반으로 @Configuration에서 사용할 @Component 설정 클래스를 찾습니다. 별도의 경로를 설정하지 않으면 @ComponenetScan이 위치한 패키지 루트 경로로 설정된다.
 - `@SrpingBootApplication` + `@EnableAutoConfiguration` + `@ComponenetScan` = `@SpringBootApplication`
-  
