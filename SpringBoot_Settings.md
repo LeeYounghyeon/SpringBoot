@@ -139,10 +139,7 @@ public class CommunityApplication{
 
 - /test/java/com/demo/AutoconfigurationApplicationTests.Java
 
-
-
-
-  ```java
+```java
 package com.example.demo2;
 
 import org.junit.Test;
