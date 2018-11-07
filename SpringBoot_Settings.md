@@ -353,3 +353,53 @@ public class PropertyTest {
   - @EnableAutoConfiguration : 자동 설정의 핵심 어노테이션이다. 클래스 경로에 지정된 내용을 기반으로 영리하게 설정 자동화를 수행한다. 특별한 설정값을 추가하지 않으면 기본값으로 작동한다.
   - @ComponenetScan : 특정 패키지 경로를 기반으로 @Configuration에서 사용할 @Component 설정 클래스를 찾습니다. 별도의 경로를 설정하지 않으면 @ComponenetScan이 위치한 패키지 루트 경로로 설정된다.
 - `@SrpingBootApplication` + `@EnableAutoConfiguration` + `@ComponenetScan` = `@SpringBootApplication`
+
+### 2.5.2 @EnableAutoConfiguration 살펴보기
+- `@Import(AutoConfigurationImportSelector.class)` : 임포트할 자동 설정을 선택한다.
+-  selectImports(): 메서드가 자동 설정할 빈을 결정한다.
+- 스프링 부트 스타터를 여러 개 등록하여 사용할 경우 내부에 중복된 빈이 설정될 경우가 빈번하다. 그래서 제외할 설정`getExclusions()`과 중복된 설정`removeDuplicates()`을 제외시켜준다.
+      - META-INF/spring.factories : 자동 설정 타킷 클래스 목록이다. `@EnableAutoConfiguration` 사용 시 자동 설정 타킷이 된다.
+      - META-INF/spring-Configuration-metadata.json : 자동 설정에 사용할 프로퍼티 정의 파일
+      - org/springf/boot/autoconfigure : 미리 구현 해놓은 자동 설정 리스트
+- 위 파일 모두 spring-boot-autoconfiguration에 미리 정의되어 있다.
+- 경로 변경
+      - application.properties
+        spring.h2.console.path=/h2-test
+      - application.yml
+        spring:
+            h2:
+              console:
+              path: /h2-test
+
+### 2.5.3 자동 설정 어노테이션 살펴보기
+- 실제 사용 예시
+H2ConsoleAutoConfiguration 클래스 코드
+
+- @Configuration : 웹 애플리케이션일 때
+
+- @ConditionalOnWebApplication(type = Type.SERVLET)
+
+- @ConditionalOnClass(WebServlet.class):WebServlet.class 가 클래스 경로에 있을 때
+
+- @ConditionalOnProperty(prefix  "spring.h2.console", name = "enabled", havingValue = "true" , mathchIfMissiong = false) spring.h2.enabled 값이 true 일때
+
+- @EnableConfigurationProperties(H2ConsoleProperties.class) : H2관련 프로퍼티 매핑
+
+
+### 2.5.4 H2 Console 자동 설정 적용
+- H2 의존성 추가
+      - build.gradle
+        complile('com.h2database:h2')
+
+- H2 Console 프로퍼티에서 enabled = true면 h2Console()빈 적용된다.
+      - application.yml
+          datasource:
+              uri: jdbc:h2:mem:testdb
+
+          spring:
+              h2:
+                  console:
+                      enabled: true
+- 런타임 시점에만 의존하도록 설정
+      - build.gradle
+        runtime('com.h2database:h2') 
