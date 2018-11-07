@@ -192,6 +192,8 @@ public class Demo2ApplicationTests {
 - assertThat(): 첫 번째 파라미터와 두 번째 파라미터가 일치해야 테스트가 성공한다.
 
 - `@Value` 매핑 방식
+
+
       - @Value("${property.test.name}")
         -> 깊이가 존재하는 키값에 대해 '.'로 구분하여 해당 값을 매핑한다.
       - @Value("${propertyTest}")
@@ -207,6 +209,8 @@ public class Demo2ApplicationTests {
 #### `@ConfigurationProperties`살펴보기
   -  프로퍼티를 사용하여 다양한 형의 프로퍼티값을 매핑할 수 있다.
   - 접두사를 사용하여 값을 바인딩한다.
+
+  
         fruit:
             list:
               - name: banana
@@ -402,4 +406,4 @@ H2ConsoleAutoConfiguration 클래스 코드
                       enabled: true
 - 런타임 시점에만 의존하도록 설정
       - build.gradle
-        runtime('com.h2database:h2') 
+        runtime('com.h2database:h2')
