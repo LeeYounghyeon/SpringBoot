@@ -54,6 +54,8 @@ public class CommunityApplication{
 
 ### 2.3.1 그레이들 래퍼
 - 그레이들을 설치한다.
+
+
       - gradle : 리눅스 및 맥 OS용 셸 스크립트
       - gradlew.bat : 윈도우용 배치 스크립트
       - gradle/wrapper/gradle-wrapper.jar : Wrapper JAR
@@ -68,11 +70,15 @@ public class CommunityApplication{
 
 
 1. `settings.gradle`: 그레이들 설정파일
-  - 루트 프로젝트 추가
-          rootProject.name = 'demo'
+      - 루트 프로젝트 추가
+
+
+    rootProject.name = 'demo'
 2. 루트 경로에서 New -> Module선택 -> Gradle 선택 -> Java 선택 -> Next
 3. Add as modile to 에서 Community 프로젝트를 선택 -> ArtifactId에 demo-web을 입력 후 Next로 모듈 생성
 4. 기본 패키지 경로를 수동으로 생성
+
+
         - src/main/java : 자바 소스 경로
         - src/test/java : 스프링 부트의 테스트 코드 경로
         - src/main/resources/static : static한 파일의 디폴트 경로
@@ -80,6 +86,8 @@ public class CommunityApplication{
 
 
 - 인텔리제이에서 모듈 생성 기능을 사용하면 `settings.gradle`에 자동으로 생성된 모듈명이 인클루드된다.
+
+
       rootProject.name = 'demo'
       include 'demo-web'
 
@@ -89,12 +97,16 @@ public class CommunityApplication{
 - 정적인 값을 키값 형식으로 관리한다.
 - application.properties에 `server.port: 80`을 입력하면 80번으로 서버 포트 설정을 변경한다.
 - 최근엔 표현의 한계로 YAML파일을 더 많이 사용한다. -> application.yml을 생성
+
+
        server:
             port: 80
 
 
 ### 2.4.1 프로파일에 따른 환경 구성 분리
 - 프로퍼티 설정을 ---을 기준으로 설정값을 나눈다.
+
+
       server:
           port: 80
       ---
@@ -210,7 +222,7 @@ public class Demo2ApplicationTests {
   -  프로퍼티를 사용하여 다양한 형의 프로퍼티값을 매핑할 수 있다.
   - 접두사를 사용하여 값을 바인딩한다.
 
-  
+
         fruit:
             list:
               - name: banana
@@ -362,6 +374,8 @@ public class PropertyTest {
 - `@Import(AutoConfigurationImportSelector.class)` : 임포트할 자동 설정을 선택한다.
 -  selectImports(): 메서드가 자동 설정할 빈을 결정한다.
 - 스프링 부트 스타터를 여러 개 등록하여 사용할 경우 내부에 중복된 빈이 설정될 경우가 빈번하다. 그래서 제외할 설정`getExclusions()`과 중복된 설정`removeDuplicates()`을 제외시켜준다.
+
+
       - META-INF/spring.factories : 자동 설정 타킷 클래스 목록이다. `@EnableAutoConfiguration` 사용 시 자동 설정 타킷이 된다.
       - META-INF/spring-Configuration-metadata.json : 자동 설정에 사용할 프로퍼티 정의 파일
       - org/springf/boot/autoconfigure : 미리 구현 해놓은 자동 설정 리스트
